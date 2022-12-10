@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>admin delete result</title>
+<script th:inline="javascript">
+
+	function del_func() {
+	var result = confirm("정말 삭제하시겠습니까?");
+	if (result == true) {
+		location.href = `delete?bookNum=[[${book.bookNum}]]`
+	}
+	return false;
+}
+	
+	var deleteResult = "[[${deleteResult}]]";
+	alert("도서 삭제 완료");
+	location.href="admin_bookList";
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

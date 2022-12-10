@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>희망도서 신청 완료</title>
+<script th:inline="javascript">
+	var insertedRNum = "[[${insertedRNum}]]";
+	
+	if(insertedRNum > 0){
+		alert("희망도서 신청 완료");
+	}else{
+		alert("희망도서 신청 실패");
+	}
+	
+	location.href="/myPage";
+</script>
+</head>
+<body>
+
+</body>
+</html>

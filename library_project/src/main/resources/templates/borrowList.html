@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>관리자 대출/예약 확인 목록</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script th:inline="javascript">
+  
+</script>
+</head>
+<body>
+
+	<form action="borrowList" method="post">
+		<div>
+			<h2>대출 목록</h2>
+			<table border="1">
+				<tr>
+					<th>신청 도서명</th>
+					<th>신청자</th>
+					<th>대출 시작일</th>
+					<th>대출 만료일</th>
+					<th>반납 상태</th>
+				</tr>
+				<tr th:each = "adminlist : ${borrowList}">
+					<td th:text="${adminlist.book_num}" style="display:none"></td>
+					<td th:text="${UrInfo.BrTitle}"></td>
+					<td th:text="${UrInfo.BrUser}"></td>
+					<td th:text="${UrInfo.BrDate}"></td>
+					<td th:text="${adminlist.BrDate.plusDays(7)}"></td>
+					<td><select class="selectbox" th:text="${adminlist.BrStatus}"
+					th:onchange="changeStatus([[${adminlist.book_num}]]), this.value">
+						<option value="" th:text="">===선택===</option>
+						<option value="done" th:selected="${adminlist.book_num} == 0">완료</option>
+						<option value="plan" th:selected="${adminlist.book_num} == 1">예정</option>
+						<option value="overdue" th:selected="${adminlist.book_num} == 2">연체</option>
+						</select></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>admin update result</title>
+<script th:inline="javascript">
+	var updateResult = "[[${updateResult}]]";
+	
+	if(updateResult > 0){
+		alert("도서 수정 완료");
+	}else{
+		alert("도서 수정 실패");
+	}
+	
+	location.href="admin_bookList";
+</script>
+</head>
+<body>
+
+</body>
+</html>

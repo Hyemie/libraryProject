@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.mapper.BookMapper">
+
+<!-- 관리자 도서 정보 등록 -->
+<insert id="insert" parameterType="vo.BookVO" useGeneratedKeys="true" keyProperty="BookNum">
+	INSERT INTO BOOK(TITLE,PUBLISHER,WRITER,TYPE,YEAR)
+	VALUES(#{Title},#{Publisher},#{Writer},#{Type},#{Year})
+</insert>
+
+<!-- 관리자 도서 정보 수정 -->
+<update id="update" parameterType="vo.BookVO">
+	UPDATE BOOK SET TITLE=#{Title}, PUBLISHER=#{Publisher}, WRITER=#{Writer}, TYPE=#{Type}, YEAR=#{Year} WHERE BOOK_NUM=#{bookNum}
+</update>
+
+<!-- 관리자 도서 정보 삭제 -->
+<delete id="delete" parameterType="int">
+	DELETE FROM BOOK WHERE BOOK_NUM=#{bookNum}
+</delete>
+
+<select id="selectAll" resultMap="bookResultMap">
+	SELECT * FROM BOOK
+</select>
+	
+<select id="select" resultMap="bookResultMap">
+	SELECT * FROM BOOK WHERE BOOK_NUM=#{bookNum}
+</select>
+
+<!-- 검색 기능 -->
+
+<!-- 페이징 - 총 게시글 수 구하기 -->
+<select id="selectTotalCount" resultType="int">
+	SELECT COUNT(*) FROM BOARD
+</select>
+
+<select id="selectList" resultMap="bookResultMap">
+	SELECT BOOKNUM, TITLE, WRITER, PUBLISHER, TYPE, YEAR
+	FROM BOOK ORDER BY BOOKNUM DESC LIMIT #{startRow},#{count}
+</select>
+
+<resultMap type="vo.BookVO" id="bookResultMap">
+	<result column="BOOK_NUM" property="BookNum"></result>
+	<result column="TITLE" property="Title"></result>
+	<result column="PUBLISHER" property="Publisher"></result>
+	<result column="WRITER" property="Writer"></result>
+	<result column="TYPE" property="Type"></result>
+	<result column="YEAR" property="Year"></result>
+</resultMap>
+
+</mapper>

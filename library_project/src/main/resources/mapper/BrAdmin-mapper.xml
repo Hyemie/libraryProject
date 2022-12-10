@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.mapper.BrAdminMapper">
+
+<insert id="insert" parameterType="vo.BrAdminVO">
+	INSERT INTO BRLIST_ADMIN(BRNAME,BRTITLE,BRUSER,BRDATE,BRSTATUS)
+	VALUES(#{BrName},#{BrTitle},#{BrUser},#{BrDate},#{BrStatus})
+</insert>
+
+<select id="selectAll" resultMap="ResultMap">
+	SELECT * FROM BRLIST_ADMIN
+</select>
+	
+<select id="select" resultMap="ResultMap">
+	SELECT * FROM BRLIST_ADMIN WHERE BRNUM=#{BrNum}
+</select>
+
+<!-- 날짜 더하기 -->
+<select id="AddDate" resultMap="ResultMap">
+	SELECT DATE_ADD(NOW(),INTERVAL 1 DAY) FROM BRLIST_ADMIN
+</select>
+
+<!-- 반납상태 예정/완료/연체 셀렉트박스로 수정하는 쿼리 -->
+<update id="changeStatus" parameterType="vo.BrAdminVO">
+	UPDATE BRLIST_ADMIN SET BRSTATUS=#{BrStatus} WHERE BRNUM=#{BrNum}
+</update>
+
+<!-- 책 대출 쿼리 -->
+<update id="borrowBook" parameterType="vo.BrAdminVO">
+	UPDATE BRLIST_ADMIN SET BOOKCOUNT = BRNUM +1 WHERE BRNUM=#{BrNum}
+</update>
+
+<!-- 책 반납 쿼리 -->
+<update id="returnBook" parameterType="vo.BrAdminVO">
+ 	UPDATE BRLIST_ADMIN SET BOOKCOUNT = BRNUM -1 WHERE BRNUM=#{BrNum}
+</update>
+
+<resultMap type="vo.BrAdminVO" id="ResultMap">
+	<result column="BOOK_NUM" property="book_num"></result>
+	<result column="BRNUM" property="BrNum"></result>
+	<result column="BRTITLE" property="BrTitle"></result>
+	<result column="BRUSER" property="BrUser"></result>
+	<result column="BRDATE" property="BrDate"></result>
+	<result column="BRSTATUS" property="BrStatus"></result>
+	<result column="BOOKCOUNT" property="BookCount"></result>
+</resultMap>
+
+</mapper>

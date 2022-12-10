@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>add books success!</title>
+<script th:inline="javascript">
+	var insertedBookNum = "[[${insertedBookNum}]]";
+
+	alert("도서 정보 등록 완료");
+
+	location.href = "/admin_bookList";
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.mapper.RegBookMapper">
+
+<!-- 희망도서 정보 등록 -->
+<insert id="Reginsert" parameterType="vo.RegBookVO" useGeneratedKeys="true" keyProperty="RNum">
+	INSERT INTO REGBOOK(RTITLE,RWRITER,RPUBLISHER,RREASON,RPRICE,RETC,RSTATE)
+	VALUES(#{RTitle},#{RWriter},#{RPublisher},#{RReason},#{RPrice},#{REtc},0)
+</insert>
+
+<select id="selectAll" resultMap="RegbookResultMap">
+	SELECT * FROM REGBOOK
+</select>
+	
+<select id="select" resultMap="RegbookResultMap">
+	SELECT * FROM REGBOOK WHERE RNUM=#{RNum}
+</select>
+
+<update id="updateState" parameterType="vo.RegBookVO">
+	UPDATE REGBOOK SET RSTATE=#{RState} WHERE RNUM=#{RNum}
+</update>
+
+<resultMap type="vo.RegBookVO" id="RegbookResultMap">
+	<result column="RNUM" property="RNum"></result>
+	<result column="RTITLE" property="RTitle"></result>
+	<result column="RWRITER" property="RWriter"></result>
+	<result column="RPUBLISHER" property="RPublisher"></result>
+	<result column="RREASON" property="RReason"></result>
+	<result column="RPRICE" property="RPrice"></result>
+	<result column="RETC" property="REtc"></result>
+</resultMap>
+
+</mapper>

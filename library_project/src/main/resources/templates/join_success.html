@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.formWrap {
+	width: 450px;
+	background-color: #eee;
+	padding: 35px;
+	margin: auto;
+}
+
+.formWrap > h3  {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.formWrap > table {
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	padding: 15px;
+}
+
+.formWrap > table td:first-child {
+	width: 85px;
+}
+
+.btnWrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 30px;
+}
+
+.btn{
+	width: 49%;
+	height: auto;
+	border: none;
+	padding: 8px 0;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.btn > a{
+	text-decoration: none;
+	color: #fff;
+}
+
+.btn_blue {
+	background-color: rgb(0, 64, 128);
+}
+
+.btn_gray {
+	background-color: #777;
+}
+</style>
+</head>
+<body>
+	<div class="formWrap">
+		<h3><b th:text="${memberInfo.name}"></b>님 가입을 축하합니다!</h3>
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td th:text="${memberInfo.id}"></td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td th:text="${memberInfo.phone}"></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td th:text="${memberInfo.email}"></td>
+			</tr>
+		</table>
+		<div class="btnWrap">
+			<div class="btn btn_blue">
+				<a href="loginForm">로그인</a>
+			</div>
+			<div class="btn btn_gray">
+				<a href="main">메인으로</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
